@@ -151,7 +151,7 @@ export default function Details({
 
     <div className="rounded-2xl bg-white/10 p-5 text-center backdrop-blur-xl">
 
-  <p className="mb-3 text-sm font-semibold text-blue-100">
+  <p className="mb-3 text-sm font-semibold text-blue-100 ">
     ☀️ UV Index
   </p>
 
@@ -160,23 +160,23 @@ export default function Details({
     <Sun
       size={46}
       className={`text-yellow-400 transition-all duration-500 hover:rotate-180 ${getUVColor(
-        uv?.current?.uv_index
+        uv?.current?.uvi
       )
         .replace("bg-", "text-")}`}
     />
   </div>
 
   <p className="text-2xl font-bold">
-    {uv?.current?.uv_index?.toFixed(1)}
+    {uv?.current?.uvi?.toFixed(1)}
   </p>
 
-  <p className="mb-4 text-sm text-blue-100">
-    {getUVStatus(uv?.current?.uv_index)}
+  <p className="mb-2 text-sm text-blue-100">
+    {getUVStatus(uv?.current?.uvi)}
   </p>
 
   <Progress
-    percent={(uv?.current?.uv_index / 11) * 100}
-    color={getUVColor(uv?.current?.uv_index)}
+    percent={(uv?.current?.uvi / 11) * 100}
+    color={getUVColor(uv?.current?.uvi)}
   />
 
 </div>

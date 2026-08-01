@@ -39,7 +39,7 @@ export default function Accordion({
       <div
         className={`overflow-hidden transition-all duration-500 ${
           open
-            ? "mt-4 max-h-250 opacity-100"
+            ? "mt-4 max-h-600 opacity-100"
             : "max-h-0 opacity-0"
         }`}
       >
