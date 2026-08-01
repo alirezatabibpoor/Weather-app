@@ -1,6 +1,6 @@
 export default function Loading() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-linear-to-br from-sky-400 via-blue-500 to-indigo-700">
+    <div className="dark:from-gray-500 dark:via-gray-700 dark:to-gray-800 flex min-h-screen items-center justify-center bg-linear-to-br from-sky-400 via-blue-500 to-indigo-700">
       
       <div className="flex flex-col items-center gap-5">
 

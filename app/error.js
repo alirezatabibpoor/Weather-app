@@ -2,7 +2,7 @@
 
 export default function Error({ error, reset }) {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-linear-to-br from-sky-400 via-blue-500 to-indigo-700 px-5">
+    <div className="dark:from-gray-500 dark:via-gray-700 dark:to-gray-800 flex min-h-screen items-center justify-center bg-linear-to-br from-sky-400 via-blue-500 to-indigo-700 px-5">
       <div className="w-full max-w-md rounded-3xl border border-white/30 bg-white/20 p-10 text-center shadow-2xl backdrop-blur-xl">
 
         <div className="mx-auto mb-6 flex h-24 w-24 items-center justify-center rounded-full bg-red-500/20 text-5xl">
