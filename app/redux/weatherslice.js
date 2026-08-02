@@ -78,6 +78,12 @@ const weatherslice = createSlice({
         state.loading = false;
         state.weather = null;
         state.forecast=null;
+        state.air=null;
+        state.uv=null;
+        state.visibility=null;
+        state.Maxtemp=null;
+        state.Mintemp=null;
+
         state.error = action.payload;
       })
 

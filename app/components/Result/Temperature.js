@@ -16,14 +16,14 @@ export default function Tempreature({temperature , maxTemp , minTemp , condition
 
     <div className="mt-4 grid grid-cols-2 gap-4">
 
-  <div className="rounded-3xl bg-white/15 p-6 text-center backdrop-blur-xl transition hover:scale-105">
+  <div className="rounded-3xl bg-white/15 p-6 text-center backdrop-blur-xl transition hover:scale-103">
     <p className="text-lg">🔺 Max</p>
     <h2 className="mt-3 text-3xl font-bold">
       {Math.round(maxTemp)}°
     </h2>
   </div>
 
-  <div className=" rounded-3xl bg-white/15 p-6 text-center backdrop-blur-xl transition hover:scale-105">
+  <div className=" rounded-3xl bg-white/15 p-6 text-center backdrop-blur-xl transition hover:scale-103">
     <p className="text-lg">🔻Min</p>
     <h2 className="mt-3 text-3xl font-bold">
       {Math.round(minTemp)}°
