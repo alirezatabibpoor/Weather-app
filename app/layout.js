@@ -9,7 +9,7 @@ export const metadata = {
   title: "Weather App",
   description: "Modern Weather Application",
   icons: {
-    icon: "🌤️",
+    icon: "https://m.media-amazon.com/images/I/51ZgFK-FbwL.png",
   },
 };
 
