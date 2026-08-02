@@ -3,8 +3,10 @@ import CredentialsProvider from "next-auth/providers/credentials";
 import { supabase } from "@/app/lib/supabase";
 
 const handler = NextAuth({
+
   providers: [
     CredentialsProvider({
+
       name: "Credentials",
 
       credentials: {
@@ -19,50 +21,103 @@ const handler = NextAuth({
         },
       },
 
-    async authorize(credentials) {
 
-  const { data, error } = await supabase
-    .from("users")
-    .select("*")
-    .eq("email", credentials.email)
-    .single();
+      async authorize(credentials) {
 
+        try {
 
-  if (error || !data) {
-    return null;
-  }
+          console.log("Login data:", credentials);
 
 
-  const isPasswordValid = await bcrypt.compare(
-    credentials.password,
-    data.password
-  );
+          const { data, error } = await supabase
+            .from("users")
+            .select("*")
+            .eq("email", credentials.email)
+            .single();
 
 
-  if (!isPasswordValid) {
-    console.log("Wrong password");
-    return null;
-  }
+
+          console.log("User:", data);
+          console.log("Supabase Error:", error);
 
 
-  return {
-    id: data.id,
-    email: data.email,
-    name: data.name,
-  };
-}
+
+          // کاربر پیدا نشد
+          if (error || !data) {
+            return null;
+          }
+
+
+
+          // پسورد ساده
+          if (data.password !== credentials.password) {
+
+            console.log("Wrong password");
+
+            return null;
+          }
+
+
+
+          // اطلاعاتی که داخل session ذخیره میشه
+          return {
+            id: data.id,
+            name: data.name,
+            email: data.email,
+          };
+
+
+        } catch (error) {
+
+          console.log("Authorize error:", error);
+
+          return null;
+
+        }
+
+      },
+
+
     }),
   ],
 
-  secret: process.env.NEXTAUTH_SECRET,
+
 
   session: {
     strategy: "jwt",
   },
 
+
+  secret: process.env.NEXTAUTH_SECRET,
+
+
   pages: {
     signIn: "/login",
   },
+
+
+  callbacks: {
+
+    async jwt({ token, user }) {
+
+      if(user){
+        token.id = user.id;
+      }
+
+      return token;
+    },
+
+
+    async session({ session, token }) {
+
+      session.user.id = token.id;
+
+      return session;
+    }
+
+  }
+
 });
+
 
 export { handler as GET, handler as POST };
