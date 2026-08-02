@@ -7,7 +7,7 @@ export async function GET(request) {
   const lon = searchParams.get("lon");
 
   const res = await fetch(
-    `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=uv_index,visibility`
+    `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current=uv_index,visibility&daily=temperature_2m_max,temperature_2m_min&timezone=auto`
   );
 
   const data = await res.json();

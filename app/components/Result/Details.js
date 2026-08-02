@@ -136,7 +136,7 @@ export default function Details({
  
 
   <p className="text-xl font-bold">
-    {uv?.current?.visibility / 1000} km
+    {visibility / 1000} km
   </p>
 
 </div>
