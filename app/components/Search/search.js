@@ -52,7 +52,7 @@ export default function Search() {
      <div className="min-h-screen bg-linear-to-br from-sky-400 via-blue-500 to-indigo-700 dark:from-gray-500 dark:via-gray-600 dark:to-gray-800 px-5 py-12
 ">
       {/* Search */}
-     <Form formik={formik} suggestions={suggestions} showSuggestions={showSuggestions} getSuggestions={getSuggestions} setShowSuggestions={setShowSuggestions}/>
+     <Form formik={formik} suggestions={suggestions} showSuggestions={showSuggestions} getSuggestions={getSuggestions} setShowSuggestions={setShowSuggestions} dispatch={dispatch}/>
       {/* Loading */}
       {loading && (
         <div className="mt-10 flex justify-center">

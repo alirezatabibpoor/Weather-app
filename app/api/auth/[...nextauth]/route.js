@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import axios from "axios";
+import { supabase } from "@/app/lib/supabase";
 
 const handler = NextAuth({
   providers: [
@@ -12,40 +12,38 @@ const handler = NextAuth({
           label: "Email",
           type: "text",
         },
+
         password: {
           label: "Password",
           type: "password",
         },
       },
 
-      async authorize(credentials) {
-        try {
-          const response = await axios.get(
-            "http://localhost:3001/Users"
-          );
+     async authorize(credentials) {
+  console.log("Credentials:", credentials);
 
-          const user = response.data.find(
-            (i) =>
-              i.email === credentials.email &&
-              i.password === credentials.password
-          );
+  const { data, error } = await supabase
+    .from("users")
+    .select("*")
+    .eq("email", credentials.email)
+    .single();
 
-          console.log("USER:", user);
+  console.log("Data:", data);
+  console.log("Error:", error);
 
-          if (!user) {
-            return null;
-          }
+  if (error || !data) return null;
 
-          return {
-            id: String(user.id),
-            email: user.email,
-            name: user.name,
-          };
-        } catch (error) {
-          console.log("AUTH ERROR:", error);
-          return null;
-        }
-      },
+  if (data.password !== credentials.password) {
+    console.log("Wrong password");
+    return null;
+  }
+
+  return {
+    id: data.id,
+    email: data.email,
+    name: data.name,
+  };
+}
     }),
   ],
 

@@ -1,5 +1,5 @@
 import Suggestions from "./Suggestions";
-export default function Form({formik,suggestions,showSuggestions,getSuggestions,setShowSuggestions})
+export default function Form({formik,suggestions,showSuggestions,getSuggestions,setShowSuggestions,dispatch})
 {
     return(
         <>
@@ -15,7 +15,7 @@ export default function Form({formik,suggestions,showSuggestions,getSuggestions,
                   placeholder="Enter city..."
                   className="dark:bg-gray-700 dark:text-white rounded-xl border border-white/30 bg-white/20 px-5 py-4 text-white outline-none placeholder:text-white/70 backdrop-blur-md"
                 />
-              <Suggestions suggestions={suggestions} showSuggestions={showSuggestions} formik={formik}/>
+              <Suggestions suggestions={suggestions} showSuggestions={showSuggestions} formik={formik} setShowSuggestions={setShowSuggestions}/>
         
                 {formik.touched.city && formik.errors.city && (
                   <p className="text-red-200">{formik.errors.city}</p>

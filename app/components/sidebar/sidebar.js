@@ -80,30 +80,28 @@ export default function Sidebar({ open, setOpen }) {
         </a>
 
 
-         <button
-         disabled
+         <a
           href="/register"
-          className="cursor-not-allowed text-start dark:text-white rounded-xl px-4 py-3 text-gray-700 transition hover:bg-blue-100 hover:text-blue-600"
+          className="text-start dark:text-white rounded-xl px-4 py-3 text-gray-700 transition hover:bg-blue-100 hover:text-blue-600"
         >
           🔑 Register
-        </button>
+        </a>
 
         {/* Login / Logout */}
         {isLoggedIn ? (
           <button
             onClick={() => signOut({ callbackUrl: "/login" })}
-            className="cursor-not-allowed mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-red-500 px-5 py-3 font-semibold text-white shadow-md transition hover:bg-red-600 hover:shadow-lg active:scale-95"
+            className=" mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-red-500 px-5 py-3 font-semibold text-white shadow-md transition hover:bg-red-600 hover:shadow-lg active:scale-95"
           >
             🚪 Sign Out
           </button>
         ) : (
-          <button
-            disabled
+          <a
             href="/login"
-            className="cursor-not-allowed  mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-green-500 px-5 py-3 font-semibold text-white shadow-md transition hover:bg-green-600 hover:shadow-lg active:scale-95"
+            className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-green-500 px-5 py-3 font-semibold text-white shadow-md transition hover:bg-green-600 hover:shadow-lg active:scale-95"
           >
             🔐 Login
-          </button>
+          </a>
         )}
       </div>
 
