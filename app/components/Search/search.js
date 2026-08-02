@@ -162,33 +162,31 @@ formik.handleSubmit();
         )
       }
      
-     <Accordion title={"5 Day Forecast"} icon={"☀️"}>
-      <div className="mt-14">
-  <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
-    {!loading &&
-      forecast?.list
-        .filter((item) => item.dt_txt.includes("12:00:00"))
-        .map((item) => (
-          <>
-           <ForecastCard
-            key={item.dt}
-            day={new Date(item.dt_txt).toLocaleDateString(
-              language === "fa" ? "fa-IR" : "en-US",
-              {
-                weekday: "long",
-              }
-            )}
-            temperature={item.main.temp}
-            humidity={item.main.humidity}
-            condition={item.weather[0].description}
-            icon={item.weather[0].icon}
-          />
-          </>
-         
-        ))}
-  </div>
-</div>
-     </Accordion>
+     {!loading && forecast && (
+  <Accordion title="5 Day Forecast" icon="☀️">
+    <div className="mt-6">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
+        {forecast.list
+          .filter((item) => item.dt_txt.includes("12:00:00"))
+          .map((item) => (
+            <ForecastCard
+              key={item.dt}
+              day={new Date(item.dt_txt).toLocaleDateString(
+                language === "fa" ? "fa-IR" : "en-US",
+                {
+                  weekday: "long",
+                }
+              )}
+              temperature={item.main.temp}
+              humidity={item.main.humidity}
+              condition={item.weather[0].description}
+              icon={item.weather[0].icon}
+            />
+          ))}
+      </div>
+    </div>
+  </Accordion>
+)}
  
     </div>
     </>
