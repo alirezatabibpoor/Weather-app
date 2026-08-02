@@ -90,7 +90,7 @@ export default function Sidebar({ open, setOpen }) {
         {/* Login / Logout */}
         {isLoggedIn ? (
           <button
-            onClick={() => signOut({ callbackUrl: "/login" })}
+            onClick={() => signOut()}
             className=" mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-red-500 px-5 py-3 font-semibold text-white shadow-md transition hover:bg-red-600 hover:shadow-lg active:scale-95"
           >
             🚪 Sign Out
