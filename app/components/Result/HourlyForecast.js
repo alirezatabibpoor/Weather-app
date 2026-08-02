@@ -3,7 +3,7 @@ export default function HourlyForecast({forecast})
     return(
         <div className="flex gap-4 overflow-x-auto rounded-2xl bg-white/10 p-4 backdrop-blur-xl">
 
-      {forecast?.list.slice(0, 8).map((item) => (
+      {forecast?.list.slice(0, 10).map((item) => (
         <div
           key={item.dt}
           className="hover:animate-pulse hover:scale-115 min-w-22.5 transition ease-in-out duration-500 rounded-xl bg-white/10 p-3 text-center"

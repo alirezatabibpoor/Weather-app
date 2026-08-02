@@ -9,6 +9,6 @@ export default function useWeathear()
      const loading = useSelector((state) => state.weather.loading);
      const suggestions = useSelector((state)=>state.weather.suggestions)
      const air = useSelector((state)=>state.weather.air);
-     const uv = useSelector((state)=>state.weather.uv)
+     const uv = useSelector((state)=>state.weather.uv);
      return {dispatch , weather , forecast , loading , air , uv , suggestions}
 }

@@ -23,7 +23,9 @@ export const getCloudStatus = (clouds) => {
   };
 
 
-  export const getUVStatus = (uv) => {
+ export const getUVStatus = (uv) => {
+  if (uv == null || isNaN(uv)) return "No Data";
+
   if (uv <= 2) return "🟢 Low";
   if (uv <= 5) return "🟡 Moderate";
   if (uv <= 7) return "🟠 High";
@@ -32,6 +34,8 @@ export const getCloudStatus = (clouds) => {
 };
 
 export const getUVColor = (uv) => {
+  if (uv == null || isNaN(uv)) return "bg-gray-400";
+
   if (uv <= 2) return "bg-green-500";
   if (uv <= 5) return "bg-yellow-400";
   if (uv <= 7) return "bg-orange-500";

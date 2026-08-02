@@ -22,6 +22,10 @@ export default function Details({
   sunset,
   uv
 }) {
+  
+  
+
+ 
 
   const progress = getSunProgress(sunrise,sunset)
 
@@ -160,27 +164,27 @@ export default function Details({
     <Sun
       size={46}
       className={`text-yellow-400 transition-all duration-500 hover:rotate-180 ${getUVColor(
-        uv?.current?.uvi
+        uv?.current?.uv_index
       )
         .replace("bg-", "text-")}`}
     />
   </div>
 
   <p className="text-2xl font-bold">
-    {uv?.current?.uvi?.toFixed(1)}
+    {uv?.current?.uv_index?.toFixed(1)}
   </p>
 
   <p className="mb-2 text-sm text-blue-100">
-    {getUVStatus(uv?.current?.uvi)}
+    {getUVStatus(uv?.current?.uv_index)}
   </p>
 
   <Progress
-    percent={(uv?.current?.uvi / 11) * 100}
-    color={getUVColor(uv?.current?.uvi)}
+     percent={Math.min((uv?.current?.uv_index / 11) * 100, 100)}
+    color={getUVColor(uv?.current?.uv_index)}
   />
 
 </div>
-      </div>
+     </div>
     </>
   );
 }

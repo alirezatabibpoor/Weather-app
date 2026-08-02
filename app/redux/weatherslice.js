@@ -8,19 +8,25 @@ export const get_city = createAsyncThunk(
       const weather = await axios.get(
         `/api/weather?city=${encodeURIComponent(city)}&lang=${lang}`
       );
+       
       const forecast = await axios.get(`/api/forecast?city=${encodeURIComponent(city)}&lang=${lang}`)
 
       const air = await axios.get(`/api/air?lat=${weather.data.coord.lat}&lon=${weather.data.coord.lon}`)
       const uv = await axios.get(`/api/uv?lat=${weather.data.coord.lat}&lon=${weather.data.coord.lon}`)
-      return {weather:weather.data , forecast:forecast.data , air:air.data , uv:uv.data
+  
 
-      }
+      return {weather:weather.data , forecast:forecast.data , air:air.data , uv:uv.data,
       
+      }
+    
+    
     } catch (error) {
       return rejectWithValue(error.response?.data);
     }
   }
 );
+
+  
 
 
 export const getSuggestions = createAsyncThunk(
