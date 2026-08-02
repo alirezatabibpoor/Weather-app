@@ -15,7 +15,7 @@ export const get_city = createAsyncThunk(
       const uv = await axios.get(`/api/uv?lat=${weather.data.coord.lat}&lon=${weather.data.coord.lon}`)
   
 
-      return {weather:weather.data , forecast:forecast.data , air:air.data , uv:uv.data,
+      return {weather:weather.data , forecast:forecast.data , air:air.data , uv:uv.data,visibility: uv.data.current.visibility,
       
       }
     
@@ -46,6 +46,7 @@ const weatherslice = createSlice({
     air:null,
     uv:null,
     error: null,
+    visibility:null,
     suggestions:[],
     loading: false,
   },
@@ -65,6 +66,7 @@ const weatherslice = createSlice({
         state.forecast = action.payload.forecast
         state.air = action.payload.air
         state.uv = action.payload.uv
+        state.visibility=action.payload.visibility
       })
 
       .addCase(get_city.rejected, (state, action) => {
