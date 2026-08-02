@@ -1,11 +1,9 @@
-import { useState } from 'react';
 import Details from './Details';
 import Header from './header';
 import Tempreature from './Temperature';
 import Accordion from '../Accordion';
 import HourlyForecast from './HourlyForecast';
 import useWeathear from '@/app/hooks/useWeather';
-
 export default function Result({
   name,
   country,
@@ -61,6 +59,7 @@ hover:shadow-blue-500/40 dark:hover:shadow-gray-500/40
 >
   <HourlyForecast forecast={forecast} />
 </Accordion>
+
     </div>
   );
 }
