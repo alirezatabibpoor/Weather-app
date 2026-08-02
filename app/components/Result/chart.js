@@ -141,7 +141,7 @@ export default function TemperatureChart({
 
       <div className="mt-6 grid grid-cols-3 gap-4">
 
-        <div className="rounded-2xl bg-white/10 p-3 text-center">
+        <div className="hover:scale-110 transition ease-in duration-200 rounded-2xl bg-white/10 p-3 text-center">
 
           <p className="text-sm text-blue-100">
             🔻 Min
@@ -153,7 +153,7 @@ export default function TemperatureChart({
 
         </div>
 
-        <div className="rounded-2xl bg-white/15 p-3 text-center border border-yellow-300/40 shadow-lg shadow-yellow-300/20">
+        <div className="hover:scale-110 transition ease-in duration-200 rounded-2xl bg-white/15 p-3 text-center border border-yellow-300/40 shadow-lg shadow-yellow-300/20">
 
           <p className="text-sm text-yellow-200">
             Current
@@ -165,7 +165,7 @@ export default function TemperatureChart({
 
         </div>
 
-        <div className="rounded-2xl bg-white/10 p-3 text-center">
+        <div className="hover:scale-110 transition ease-in duration-200 rounded-2xl bg-white/10 p-3 text-center">
 
           <p className="text-sm text-blue-100">
             🔺 Max
