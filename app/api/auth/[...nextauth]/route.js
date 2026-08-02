@@ -19,8 +19,7 @@ const handler = NextAuth({
         },
       },
 
-     async authorize(credentials) {
-  console.log("Credentials:", credentials);
+    async authorize(credentials) {
 
   const { data, error } = await supabase
     .from("users")
@@ -28,15 +27,23 @@ const handler = NextAuth({
     .eq("email", credentials.email)
     .single();
 
-  console.log("Data:", data);
-  console.log("Error:", error);
 
-  if (error || !data) return null;
+  if (error || !data) {
+    return null;
+  }
 
-  if (data.password !== credentials.password) {
+
+  const isPasswordValid = await bcrypt.compare(
+    credentials.password,
+    data.password
+  );
+
+
+  if (!isPasswordValid) {
     console.log("Wrong password");
     return null;
   }
+
 
   return {
     id: data.id,
