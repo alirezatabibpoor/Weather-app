@@ -80,33 +80,35 @@ export default function Sidebar({ open, setOpen }) {
         </a>
 
 
-         <a
+         <button
+         disabled
           href="/register"
-          className="dark:text-white rounded-xl px-4 py-3 text-gray-700 transition hover:bg-blue-100 hover:text-blue-600"
+          className="cursor-not-allowed text-start dark:text-white rounded-xl px-4 py-3 text-gray-700 transition hover:bg-blue-100 hover:text-blue-600"
         >
           🔑 Register
-        </a>
+        </button>
 
         {/* Login / Logout */}
         {isLoggedIn ? (
           <button
             onClick={() => signOut({ callbackUrl: "/login" })}
-            className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-red-500 px-5 py-3 font-semibold text-white shadow-md transition hover:bg-red-600 hover:shadow-lg active:scale-95"
+            className="cursor-not-allowed mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-red-500 px-5 py-3 font-semibold text-white shadow-md transition hover:bg-red-600 hover:shadow-lg active:scale-95"
           >
             🚪 Sign Out
           </button>
         ) : (
-          <a
+          <button
+            disabled
             href="/login"
-            className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-green-500 px-5 py-3 font-semibold text-white shadow-md transition hover:bg-green-600 hover:shadow-lg active:scale-95"
+            className="cursor-not-allowed  mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-green-500 px-5 py-3 font-semibold text-white shadow-md transition hover:bg-green-600 hover:shadow-lg active:scale-95"
           >
             🔐 Login
-          </a>
+          </button>
         )}
       </div>
 
       {/* Footer */}
-      <div className="absolute bottom-6 left-6 right-6 rounded-xl bg-blue-50 p-4 text-center">
+      <div className="mt-3 absolute bottom-6 left-6 right-6 rounded-xl bg-blue-50 p-4 text-center">
         <p className="text-sm text-blue-600">
           Check the weather anywhere 🌍
         </p>
