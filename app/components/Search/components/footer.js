@@ -1,8 +1,8 @@
-import ForecastCard from "../ForecastCard";
-import AirQualityCard from "../AirQualityCard";
-import WeatherMap from "../weathermap/WeatherMap";
-import Accordion from "../Accordion";
+import ForecastCard from "./ForecastCard";
+import WeatherMap from "../../weathermap/WeatherMap";
+import Accordion from "../../Accordion";
 import {MapIcon} from "lucide-react"
+import AirQualityCard from "./AirQualityCard";
 export default function Footer({weather , air , forecast , loading , language})
 {
     return(

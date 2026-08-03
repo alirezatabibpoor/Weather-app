@@ -1,6 +1,6 @@
-import TemperatureChart from "./chart";
+import TemperatureChart from "./chart"; 
 import { ChartBar } from "lucide-react";
-import Accordion from "../Accordion";
+import Accordion from "../../Accordion";
 export default function Tempreature({temperature , maxTemp , minTemp , condition , forecast})
 {
     return(

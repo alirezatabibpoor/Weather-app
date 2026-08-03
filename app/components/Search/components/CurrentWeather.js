@@ -1,4 +1,4 @@
-import Result from "../Result/result"
+import Result from "../../Result/result"
 export default function CurrentWeather({loading , weather ,uv})
 {
     return(

@@ -1,8 +1,8 @@
-import Details from './Details';
-import Header from './header';
-import Tempreature from './Temperature';
+import Details from './components/Details';
+import Header from './components/header';
+import Tempreature from './components/Temperature';
 import Accordion from '../Accordion';
-import HourlyForecast from './HourlyForecast';
+import HourlyForecast from './components/HourlyForecast';
 import useWeathear from '@/app/hooks/useWeather';
 export default function Result({
   name,
@@ -50,6 +50,7 @@ hover:shadow-blue-500/40 dark:hover:shadow-gray-500/40
     visibility={visibility}
     clouds={clouds}
     uv={uv}
+    condition={condition}
   />
 </Accordion>
 

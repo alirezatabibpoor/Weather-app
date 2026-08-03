@@ -31,8 +31,8 @@ export default function TemperatureChart({ forecast }) {
         <AreaChart data={chartData}>
           <defs>
             <linearGradient id="tempGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="5%" stopColor="#584FFF" stopOpacity={0.9} />
-              <stop offset="95%" stopColor="#FFD54F" stopOpacity={0} />
+              <stop offset="5%" stopColor="#DCDCE0" stopOpacity={0.9} />
+              <stop offset="95%" stopColor="#A5A5A3" stopOpacity={0} />
             </linearGradient>
           </defs>
 
@@ -55,7 +55,7 @@ export default function TemperatureChart({ forecast }) {
           <Area
             type="monotone"
             dataKey="temp"
-            stroke="#FFD54F"
+            stroke="#C2311E"
             strokeWidth={4}
             fill="url(#tempGradient)"
             animationDuration={1500}

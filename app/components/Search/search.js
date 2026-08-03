@@ -8,9 +8,9 @@ import Loading from "../loading";
 import {isPersian} from '../../utils/function'
 import useWeathear from "../../hooks/useWeather";
 import OfflineBanner from "../OfflineBanner";
-import Footer from "./footer";
-import CurrentWeather from "./CurrentWeather";
-import Form from "./Form";
+import Form from "./components/Form";
+import Footer from "./components/footer";
+import CurrentWeather from "./components/CurrentWeather";
 
 export default function Search() {
   const {dispatch , weather , forecast , loading ,air, uv , suggestions} = useWeathear();
