@@ -7,7 +7,7 @@ import { ThemeProvider } from "next-themes";
 export const metadata = {
   title: "Weather App",
   description: "Modern Weather Application",
-  manifest:"/my-app/public/manifest.js",
+  manifest:"/my-app/public/manifest.json",
   icons: {
     icon: "/my-app/public/weather.png",
   },
