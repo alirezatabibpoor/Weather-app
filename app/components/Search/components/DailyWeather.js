@@ -22,6 +22,9 @@ const aqi = air?.list?.[0]?.main?.aqi
     from-sky-400
     via-blue-600
     to-indigo-800
+    dark:from-gray-400
+    dark:via-gray-600
+    dark:to-gray-800
     p-6
     text-white
     shadow-2xl
@@ -80,7 +83,8 @@ const aqi = air?.list?.[0]?.main?.aqi
       <div className="
       mt-6
       grid
-      grid-cols-2
+      sm:grid-cols-2
+      grid-cols-1
       gap-4
       ">
 
@@ -109,7 +113,8 @@ const aqi = air?.list?.[0]?.main?.aqi
       <div className="
       mt-4
       grid
-      grid-cols-2
+      grid-cols-1
+      sm:grid-cols-2
       gap-4
       ">
 
