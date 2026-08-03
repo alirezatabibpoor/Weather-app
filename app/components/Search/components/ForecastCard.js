@@ -4,12 +4,15 @@ export default function ForecastCard({
   condition,
   humidity,
   icon,
+  onClick
 }) {
 
   return (
 
     <div
+    onClick={onClick}
     className="
+    cursor-pointer
     group
     rounded-3xl
     border
