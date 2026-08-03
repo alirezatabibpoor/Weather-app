@@ -9,8 +9,9 @@ export const metadata = {
   description: "Modern Weather Application",
   manifest:"/my-app/public/manifest.json",
   icons: {
-    icon: "/my-app/public/weather.png",
+    icon: "/my-app/public/icons/weather.png",
   },
+  
 };
 
 export default function RootLayout({ children }) {

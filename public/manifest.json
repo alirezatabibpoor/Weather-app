@@ -1,24 +1,30 @@
 {
-  "name": "Weather App",
+  "name": "Weather Application",
   "short_name": "Weather",
   "description": "Modern Weather Application",
   "start_url": "/",
+  "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
-  "background_color": "#2563eb",
+  "background_color": "#0f172a",
   "theme_color": "#2563eb",
+  "lang": "en",
   "icons": [
     {
-      "src": "/my-app/public/weather.png",
+      "src": "/my-app/public/icons/weather.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any"
+      "type": "image/png"
     },
     {
-      "src": "/my-app/public/weather.png",
+      "src": "/my-app/public/icons/weather.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/my-app/public/icons/weather.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any"
+      "purpose": "maskable"
     }
   ]
 }
