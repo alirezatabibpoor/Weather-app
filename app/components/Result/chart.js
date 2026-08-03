@@ -5,180 +5,63 @@ import {
   AreaChart,
   Area,
   XAxis,
-  YAxis,
   Tooltip,
-  ReferenceDot,
-  defs,
-  linearGradient,
-  stop,
+  CartesianGrid,
 } from "recharts";
 
-export default function TemperatureChart({
-  minTemp,
-  temperature,
-  maxTemp,
-}) {
-  const data = [
-    {
-      name: "Min",
-      temp: Math.round(minTemp),
-    },
-    {
-      name: "Now",
-      temp: Math.round(temperature),
-    },
-    {
-      name: "Max",
-      temp: Math.round(maxTemp),
-    },
-  ];
+export default function TemperatureChart({ forecast }) {
+  if (!forecast?.list) return null;
+
+  const chartData = forecast.list.slice(0,12).map((item) => ({
+    time: new Date(item.dt * 1000).toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+    }),
+    temp: Math.round(item.main.temp),
+    feels: Math.round(item.main.feels_like),
+  }));
 
   return (
-    <div className="mt-6 rounded-3xl bg-white/10 backdrop-blur-2xl p-6 shadow-2xl border border-white/10">
-
-      <h2 className="text-center text-xl font-bold text-white mb-6">
-        🌡 Temperature Trend
+    <div className="rounded-3xl bg-white/10 p-6 backdrop-blur-xl">
+      <h2 className="mb-6 text-center text-2xl font-bold text-white">
+        🌡️ Temperature Throughout the Day
       </h2>
 
-      <div className="h-64">
+      <ResponsiveContainer width="100%" height={320}>
+        <AreaChart data={chartData}>
+          <defs>
+            <linearGradient id="tempGradient" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="5%" stopColor="#584FFF" stopOpacity={0.9} />
+              <stop offset="95%" stopColor="#FFD54F" stopOpacity={0} />
+            </linearGradient>
+          </defs>
 
-        <ResponsiveContainer width="100%" height="100%">
+          <CartesianGrid strokeDasharray="4 4" stroke="#ffffff20" />
 
-          <AreaChart data={data}>
+          <XAxis
+            dataKey="time"
+            tick={{ fill: "white", fontSize: 12 }}
+          />
 
-            <defs>
+          <Tooltip
+            contentStyle={{
+              background: "#1e293b",
+              border: "none",
+              borderRadius: 15,
+              color: "white",
+            }}
+          />
 
-              <linearGradient
-                id="temperatureGradient"
-                x1="0"
-                y1="0"
-                x2="1"
-                y2="0"
-              >
-                <stop offset="0%" stopColor="#38bdf8" />
-                <stop offset="35%" stopColor="#22c55e" />
-                <stop offset="65%" stopColor="#facc15" />
-                <stop offset="100%" stopColor="#ef4444" />
-              </linearGradient>
-
-              <linearGradient
-                id="areaGradient"
-                x1="0"
-                y1="0"
-                x2="0"
-                y2="1"
-              >
-                <stop offset="0%" stopColor="#38bdf8" stopOpacity={0.45} />
-                <stop offset="100%" stopColor="#38bdf8" stopOpacity={0} />
-              </linearGradient>
-
-            </defs>
-
-            <XAxis
-              dataKey="name"
-              tick={{
-                fill: "white",
-                fontSize: 14,
-              }}
-              axisLine={false}
-              tickLine={false}
-            />
-
-            <YAxis
-              hide
-              domain={[
-                Math.floor(minTemp - 3),
-                Math.ceil(maxTemp + 3),
-              ]}
-            />
-
-            <Tooltip
-              cursor={false}
-              contentStyle={{
-                background: "rgba(30,41,59,.95)",
-                borderRadius: "18px",
-                border: "1px solid rgba(255,255,255,.15)",
-                color: "white",
-                backdropFilter: "blur(20px)",
-              }}
-              formatter={(value) => [`${value}°C`, "Temperature"]}
-            />
-
-            <Area
-              type="monotone"
-              dataKey="temp"
-              stroke="url(#temperatureGradient)"
-              fill="url(#areaGradient)"
-              strokeWidth={5}
-              animationDuration={1500}
-              animationEasing="ease-out"
-              dot={{
-                r: 7,
-                strokeWidth: 3,
-                fill: "#ffffff",
-                stroke: "#38bdf8",
-              }}
-              activeDot={{
-                r: 10,
-                fill: "#facc15",
-              }}
-            />
-
-            <ReferenceDot
-              x="Now"
-              y={Math.round(temperature)}
-              r={13}
-              fill="#fde047"
-              stroke="#fff"
-              strokeWidth={4}
-            />
-
-          </AreaChart>
-
-        </ResponsiveContainer>
-
-      </div>
-
-      <div className="mt-6 grid grid-cols-3 gap-4">
-
-        <div className="hover:scale-110 transition ease-in duration-200 rounded-2xl bg-white/10 p-3 text-center">
-
-          <p className="text-sm text-blue-100">
-            🔻 Min
-          </p>
-
-          <h3 className="text-2xl font-bold text-cyan-300">
-            {Math.round(minTemp)}°
-          </h3>
-
-        </div>
-
-        <div className="hover:scale-110 transition ease-in duration-200 rounded-2xl bg-white/15 p-3 text-center border border-yellow-300/40 shadow-lg shadow-yellow-300/20">
-
-          <p className="text-sm text-yellow-200">
-            Current
-          </p>
-
-          <h3 className="animate-pulse text-3xl font-extrabold text-yellow-300">
-            {Math.round(temperature)}°
-          </h3>
-
-        </div>
-
-        <div className="hover:scale-110 transition ease-in duration-200 rounded-2xl bg-white/10 p-3 text-center">
-
-          <p className="text-sm text-blue-100">
-            🔺 Max
-          </p>
-
-          <h3 className="text-2xl font-bold text-red-300">
-            {Math.round(maxTemp)}°
-          </h3>
-
-        </div>
-
-      </div>
-
+          <Area
+            type="monotone"
+            dataKey="temp"
+            stroke="#FFD54F"
+            strokeWidth={4}
+            fill="url(#tempGradient)"
+            animationDuration={1500}
+          />
+        </AreaChart>
+      </ResponsiveContainer>
     </div>
   );
 }

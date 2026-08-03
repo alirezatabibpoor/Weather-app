@@ -33,7 +33,7 @@ hover:shadow-blue-500/40 dark:hover:shadow-gray-500/40
 ">
       <Header country={country} name={name} icon={icon} condition={condition} timezone={timezone}/>
       {/* Temperature */}
-      <Tempreature temperature={temperature} maxTemp={maxTemp} minTemp={minTemp} condition={condition}/>
+      <Tempreature temperature={temperature} maxTemp={maxTemp} minTemp={minTemp} condition={condition} forecast={forecast}/>
       
       <Accordion
        title="Weather Details"

@@ -23,7 +23,7 @@ export default function Suggestions({
           >
             <div className="flex items-center gap-4">
               <div className="rounded-full bg-sky-500/20 p-3 transition group-hover:scale-110 group-hover:bg-sky-500/40">
-                <MapPin className="h-5 w-5 text-sky-300" />
+                <MapPin className="h-5 w-5 text-blue-900 dark:text-sky-300" />
               </div>
 
               <div>

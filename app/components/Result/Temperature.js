@@ -1,7 +1,7 @@
 import TemperatureChart from "./chart";
 import { ChartBar } from "lucide-react";
 import Accordion from "../Accordion";
-export default function Tempreature({temperature , maxTemp , minTemp , condition})
+export default function Tempreature({temperature , maxTemp , minTemp , condition , forecast})
 {
     return(
           <div className="mx-2 my-8 text-center">
@@ -37,7 +37,7 @@ export default function Tempreature({temperature , maxTemp , minTemp , condition
         </p>
 
         <Accordion title={"Status Charts"} icon={<ChartBar/>}>
-            <TemperatureChart minTemp={minTemp} maxTemp={maxTemp} temperature={temperature}/>
+            <TemperatureChart forecast={forecast}/>
         </Accordion>
 
       </div>

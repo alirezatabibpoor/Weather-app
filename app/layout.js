@@ -4,7 +4,6 @@ import StoreProvider from "./storeprovider";
 import "react-toastify/dist/ReactToastify.css";
 import "./design.css";
 import { ThemeProvider } from "next-themes";
-
 export const metadata = {
   title: "Weather App",
   description: "Modern Weather Application",
