@@ -10,6 +10,7 @@ export const metadata = {
   manifest:"/my-app/public/manifest.json",
   icons: {
     icon: "/my-app/public/icons/weather.png",
+    icon:"https://m.media-amazon.com/images/I/51ZgFK-FbwL.png"
   },
   
 };

@@ -9,7 +9,8 @@ import {
   Factory,
   Flame,
   Droplets,
-  Activity
+  Activity,
+  HeartPulse
 } from "lucide-react";
 
 
@@ -28,6 +29,7 @@ export default function AirQualityCard({ air }) {
 
 
   const pollutants = [
+    
     {
       label: "PM2.5",
       value: air.list[0].components.pm2_5,

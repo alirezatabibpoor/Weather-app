@@ -1,4 +1,4 @@
-export default function DailyWeather({ data , air }) {
+export default function DailyWeather({ data , air}) {
   const quality = {
   1: "🟢 Excellent",
   2: "🟡 Fair",
@@ -8,6 +8,8 @@ export default function DailyWeather({ data , air }) {
 };
 
 const aqi = air?.list?.[0]?.main?.aqi
+
+
 
   return (
 
@@ -22,9 +24,9 @@ const aqi = air?.list?.[0]?.main?.aqi
     from-sky-400
     via-blue-600
     to-indigo-800
-    dark:from-gray-400
-    dark:via-gray-600
-    dark:to-gray-800
+    dark:from-gray-500
+    dark:via-gray-700
+    dark:to-gray-900
     p-6
     text-white
     shadow-2xl
@@ -75,37 +77,6 @@ const aqi = air?.list?.[0]?.main?.aqi
         />
 
       </div>
-
-
-
-      {/* Temperature */}
-
-      <div className="
-      mt-6
-      grid
-      sm:grid-cols-2
-      grid-cols-1
-      gap-4
-      ">
-
-
-        <InfoCard
-        title="Maximum"
-        value={`${Math.round(data.main.temp_max)}°`}
-        icon="🔥"
-        />
-
-
-        <InfoCard
-        title="Minimum"
-        value={`${Math.round(data.main.temp_min)}°`}
-        icon="❄️"
-        />
-
-
-      </div>
-
-
 
 
       {/* Details */}
@@ -202,6 +173,7 @@ const aqi = air?.list?.[0]?.main?.aqi
     </div>
   </div>
 )}
+
 
     </div>
 

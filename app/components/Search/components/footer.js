@@ -13,11 +13,12 @@ export default function Footer({
   air,
   forecast,
   loading,
-  language
+  language,
+  uv
 }) {
 
   const [selectedDay, setSelectedDay] = useState(null);
-
+   
 
   return (
     <div
@@ -152,7 +153,7 @@ export default function Footer({
         .filter(item =>
           item.dt_txt.includes("12:00:00")
         )
-        .map(item=>(
+        .map((item , index)=>(
 
 
           <ForecastCard
@@ -192,10 +193,13 @@ export default function Footer({
             item.weather[0].icon
           }
 
+          active={selectedDay===index}
 
+ 
           onClick={()=>
-            setSelectedDay(item)
-          }
+          setSelectedDay({ data:item, date:item.dt_txt.split(" ")[0]
+ })
+}
 
 
           />
@@ -212,8 +216,6 @@ export default function Footer({
 
 
         </Accordion>
-
-
         </div>
 
       )}
@@ -233,15 +235,17 @@ export default function Footer({
         >
 
           <DailyWeather
-          data={selectedDay}
-          air={air}
-          />
+ data={selectedDay.data}
+ air={air}
+/>
 
         </Modal>
 
       )
       }
-
+{
+  console.log("uv:",uv)
+}
 
 
     </div>

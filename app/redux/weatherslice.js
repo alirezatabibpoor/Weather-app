@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import { act } from "react";
 
 export const get_city = createAsyncThunk(
   "/weather/city",
@@ -72,6 +71,7 @@ const weatherslice = createSlice({
         state.visibility=action.payload.visibility
         state.Maxtemp=action.payload.Maxtemp
         state.Mintemp=action.payload.Mintemp
+        
       })
 
       .addCase(get_city.rejected, (state, action) => {
@@ -83,6 +83,7 @@ const weatherslice = createSlice({
         state.visibility=null;
         state.Maxtemp=null;
         state.Mintemp=null;
+        
 
         state.error = action.payload;
       })
