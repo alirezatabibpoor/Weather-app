@@ -13,10 +13,12 @@ export const get_city = createAsyncThunk(
 
       const air = await axios.get(`/api/air?lat=${weather.data.coord.lat}&lon=${weather.data.coord.lon}`)
       const uv = await axios.get(`/api/uv?lat=${weather.data.coord.lat}&lon=${weather.data.coord.lon}`)
-  
+      const hourly_weather = await axios.get(
+  `/api/hourly?lat=${weather.data.coord.lat}&lon=${weather.data.coord.lon}`
+);
 
       return {weather:weather.data , forecast:forecast.data , air:air.data , uv:uv.data,visibility: uv.data.current.visibility,
-      Maxtemp:uv.data.daily.temperature_2m_max , Mintemp:uv.data.daily.temperature_2m_min
+      Maxtemp:uv.data.daily.temperature_2m_max , Mintemp:uv.data.daily.temperature_2m_min,hourly_weather:hourly_weather.data
       }
     
     
@@ -49,6 +51,7 @@ const weatherslice = createSlice({
     visibility:null,
     Maxtemp:null,
     Mintemp:null,
+    hourly_weather:null,
     suggestions:[],
     loading: false,
   },
@@ -71,6 +74,7 @@ const weatherslice = createSlice({
         state.visibility=action.payload.visibility
         state.Maxtemp=action.payload.Maxtemp
         state.Mintemp=action.payload.Mintemp
+        state.hourly_weather = action.payload.hourly_weather;
         
       })
 
@@ -83,6 +87,7 @@ const weatherslice = createSlice({
         state.visibility=null;
         state.Maxtemp=null;
         state.Mintemp=null;
+        state.hourly_weather = null;
         
 
         state.error = action.payload;

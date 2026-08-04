@@ -83,3 +83,17 @@ export const getSunProgress = (sunrise, sunset) => {
 
   return ((now - sunrise) / (sunset - sunrise)) * 100;
 };
+
+export function weatherCodeToEmoji(code) {
+  if (code === 0) return "☀️";
+  if ([1, 2].includes(code)) return "🌤️";
+  if (code === 3) return "☁️";
+  if ([45, 48].includes(code)) return "🌫️";
+  if ([51, 53, 55].includes(code)) return "🌦️";
+  if ([61, 63, 65].includes(code)) return "🌧️";
+  if ([71, 73, 75].includes(code)) return "❄️";
+  if ([80, 81, 82].includes(code)) return "🌦️";
+  if ([95, 96, 99].includes(code)) return "⛈️";
+
+  return "🌤️";
+}

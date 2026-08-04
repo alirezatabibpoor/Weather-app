@@ -1,5 +1,5 @@
 import Result from "../../Result/result"
-export default function CurrentWeather({loading , weather ,uv})
+export default function CurrentWeather({loading , weather ,uv , forecast})
 {
     return(
         <>
@@ -24,6 +24,10 @@ export default function CurrentWeather({loading , weather ,uv})
            maxTemp={uv?.daily?.temperature_2m_max?.[0]}
            uv={uv}
            timezone={weather.timezone}
+           forecast={forecast}
+          
+
+           
 />
         </div>
       )}

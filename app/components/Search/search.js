@@ -61,7 +61,7 @@ export default function Search() {
       )}
 
       {/* Current Weather */}
-      <CurrentWeather loading={loading} weather={weather} uv={uv}/>
+      <CurrentWeather  loading={loading} weather={weather} uv={uv} forecast={forecast}/>
 
      <Footer air={air} forecast={forecast} weather={weather} loading={loading} language={language} uv={uv}/>
  

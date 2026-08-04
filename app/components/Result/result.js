@@ -22,9 +22,11 @@ export default function Result({
   minTemp,
   maxTemp,
   uv,
-  timezone
+  timezone,
+  forecast,
 }) {
-  const {forecast} = useWeathear()
+  
+  
 
   return (
     <div className="w-fit overflow-hidden rounded-3xl bg-linear-to-br from-blue-500 via-blue-600 to-indiego-400 dark:from-gray-700 dark:via-gray-800 dark:to-gray-900 text-white shadow-2xl transition duration-300
