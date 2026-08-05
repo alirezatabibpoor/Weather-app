@@ -9,7 +9,6 @@ export default function useWeathear()
      const loading = useSelector((state) => state.weather.loading);
      const suggestions = useSelector((state)=>state.weather.suggestions)
      const air = useSelector((state)=>state.weather.air);
-     const uv = useSelector((state)=>state.weather.uv);
-     const hourly_weather = useSelector((state)=>state.weather.hourly_weather)
-     return {dispatch , weather , forecast , loading , air , uv , suggestions , hourly_weather}
+     const extra = useSelector((state)=>state.weather.extra)
+     return {dispatch , weather , forecast , loading , air  , suggestions , extra}
 }

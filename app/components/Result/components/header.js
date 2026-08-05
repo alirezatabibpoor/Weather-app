@@ -1,10 +1,14 @@
-
 "use client"
+import { weatherCodeToEmoji } from "@/app/utils/function";
 import { useEffect, useState } from "react";
 import { getCityDateTime } from "@/app/utils/function";
-export default function Header({name , country ,icon , condition,timezone})
+export default function Header({name , country ,timezone , extra})
 {
   const [now , setnow]=useState(new Date());
+  
+  const weatherCode = extra?.current?.weather_code;
+  const isDay = extra?.current?.is_day;
+  console.log(extra.current);
   useEffect(()=>
   {
     const timer = setInterval(()=>{
@@ -38,13 +42,8 @@ return(
            />
         </div>
     
-        <div className="text-4xl">
-           <p className="mt-2 text-lg font-medium text-blue-100">
-         <img className="animate-pulse transition-all ease-in-out duration-1000"
-        src={`https://openweathermap.org/img/wn/${icon}@2x.png`}
-        alt={condition}
-      />
-        </p>
+        <div className="text-7xl animate-pulse">
+           {weatherCodeToEmoji(weatherCode, isDay)}
         </div>
       </div>
      

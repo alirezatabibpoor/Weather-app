@@ -21,19 +21,18 @@ export default function Result({
   clouds,
   minTemp,
   maxTemp,
-  uv,
   timezone,
   forecast,
 }) {
   
-  const{hourly_weather}= useWeathear();
+  const{extra}= useWeathear();
 
   return (
     <div className="w-fit overflow-hidden rounded-3xl bg-linear-to-br from-blue-500 via-blue-600 to-indiego-400 dark:from-gray-700 dark:via-gray-800 dark:to-gray-900 text-white shadow-2xl transition duration-300
 hover:-translate-y-2
 hover:shadow-blue-500/40 dark:hover:shadow-gray-500/40
 ">
-      <Header country={country} name={name} icon={icon} condition={condition} timezone={timezone}/>
+      <Header extra={extra} country={country} name={name} icon={icon} condition={condition} timezone={timezone}/>
       {/* Temperature */}
       <Tempreature temperature={temperature} maxTemp={maxTemp} minTemp={minTemp} condition={condition} forecast={forecast}/>
       
@@ -51,7 +50,7 @@ hover:shadow-blue-500/40 dark:hover:shadow-gray-500/40
     feelsLike={feelsLike}
     visibility={visibility}
     clouds={clouds}
-    uv={uv}
+    extra={extra}
     condition={condition}
   />
 </Accordion>
@@ -60,7 +59,7 @@ hover:shadow-blue-500/40 dark:hover:shadow-gray-500/40
   title="Hourly Forecast"
   icon="🕒"
 >
-  <HourlyForecast hourly_weather={hourly_weather} />
+  <HourlyForecast condition={condition} extra={extra} />
 </Accordion>
 
     </div>

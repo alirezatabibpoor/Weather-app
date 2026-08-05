@@ -8,17 +8,17 @@ import { MapIcon } from "lucide-react";
 import AirQualityCard from "./AirQualityCard";
 import Modal from "../../Modal/Modal";
 import DailyWeather from "./DailyWeather";
+import useWeathear from "@/app/hooks/useWeather";
 
 export default function Footer({
   weather,
   air,
   forecast,
   loading,
-  language,
-  uv,
+  language
 }) {
   const [selectedDay, setSelectedDay] = useState(null);
-
+  const {extra} = useWeathear();
   const dailyForecast =
     forecast?.list?.filter((item) =>
       item.dt_txt.includes("12:00:00")
@@ -56,7 +56,7 @@ export default function Footer({
       {!loading && air && (
         <div className="overflow-hidden rounded-3xl border border-white/20 bg-linear-to-br from-blue-500 via-blue-600 to-indigo-400 shadow-xl dark:from-gray-700 dark:via-gray-800 dark:to-gray-900">
           <Accordion title="🌫️ Air Quality" icon="🌫️">
-            <AirQualityCard air={air} />
+            <AirQualityCard air={air} extra={extra} />
           </Accordion>
         </div>
       )}
@@ -67,24 +67,47 @@ export default function Footer({
           <Accordion title="5 Day Forecast" icon="☀️">
             <div className="flex flex-col divide-y divide-white/10">
 
-              {dailyForecast.map((item, index) => (
-                <ForecastRow
-                  key={item.dt}
-                  day={new Date(item.dt_txt).toLocaleDateString(
-                    language === "fa" ? "fa-IR" : "en-US",
-                    {
-                      weekday: "long",
-                    }
-                  )}
-                  icon={item.weather[0].icon}
-                  condition={item.weather[0].description}
-                  humidity={item.main.humidity}
-                  maxTemp={uv?.daily?.temperature_2m_max?.[index]}
-                  minTemp={uv?.daily?.temperature_2m_min?.[index]}
-                  active={selectedDay === index}
-                  onClick={() => setSelectedDay(index)}
-                />
-              ))}
+              {dailyForecast.map((item) => {
+
+  const date = item.dt_txt.split(" ")[0];
+
+  const dailyIndex = extra?.daily?.time?.findIndex(
+    (d) => d === date
+  );
+
+  const maxTemp =
+    dailyIndex !== -1
+      ? extra.daily.temperature_2m_max[dailyIndex]
+      : undefined;
+
+  const minTemp =
+    dailyIndex !== -1
+      ? extra.daily.temperature_2m_min[dailyIndex]
+      : undefined;
+
+  return (
+    <ForecastRow
+      key={item.dt}
+      day={new Date(item.dt_txt).toLocaleDateString(
+        language === "fa" ? "fa-IR" : "en-US",
+        {
+          weekday: "long",
+        }
+      )}
+      icon={extra.daily.weather_code[dailyIndex]}
+      condition={item.weather[0].description}
+      minTemp={minTemp}
+      maxTemp={maxTemp}
+      onClick={() =>
+        setSelectedDay({
+          data: item,
+          minTemp,
+          maxTemp,
+        })
+      }
+    />
+  );
+})}
 
             </div>
           </Accordion>
@@ -92,16 +115,16 @@ export default function Footer({
       )}
 
       {/* Modal */}
-      {selectedDay !== null && (
-        <Modal close={() => setSelectedDay(null)}>
-          <DailyWeather
-            data={dailyForecast[selectedDay]}
-            air={air}
-            uv={uv}
-            minTemp={uv?.daily?.temperature_2m_min?.[selectedDay]}
-            maxTemp={uv?.daily?.temperature_2m_max?.[selectedDay]}
-          />
-        </Modal>
+     {selectedDay && (
+  <Modal close={() => setSelectedDay(null)}>
+    <DailyWeather
+      data={selectedDay.data}
+      air={air}
+      extra={extra}
+      minTemp={selectedDay.minTemp}
+      maxTemp={selectedDay.maxTemp}
+    />
+  </Modal>
       )}
     </div>
   );

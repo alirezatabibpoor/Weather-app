@@ -13,7 +13,7 @@ import Footer from "./components/footer";
 import CurrentWeather from "./components/CurrentWeather";
 
 export default function Search() {
-  const {dispatch , weather , forecast , loading ,air, uv , suggestions} = useWeathear();
+  const {dispatch , weather , forecast , loading ,air, extra , suggestions} = useWeathear();
   const [language, setLanguage] = useState("en");
   const [showSuggestions, setShowSuggestions] = useState(true);
   const formik = useFormik({
@@ -61,9 +61,9 @@ export default function Search() {
       )}
 
       {/* Current Weather */}
-      <CurrentWeather  loading={loading} weather={weather} uv={uv} forecast={forecast}/>
+      <CurrentWeather  loading={loading} weather={weather} extra={extra} forecast={forecast}/>
 
-     <Footer air={air} forecast={forecast} weather={weather} loading={loading} language={language} uv={uv}/>
+     <Footer air={air} forecast={forecast} weather={weather} loading={loading} language={language}/>
  
     </div>
     </>

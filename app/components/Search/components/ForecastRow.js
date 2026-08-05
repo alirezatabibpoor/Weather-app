@@ -1,3 +1,5 @@
+import { weatherCodeToEmoji } from "@/app/utils/function";
+
 export default function ForecastRow({
   day,
   icon,
@@ -23,10 +25,7 @@ export default function ForecastRow({
         {day}
       </div>
 
-      <img
-        src={`https://openweathermap.org/img/wn/${icon}.png`}
-        className="h-10 w-10 animate-pulse transition-all duration-3000"
-      />
+      <p className="">{weatherCodeToEmoji(icon)}</p>
 
       <div className="flex-1 px-4 capitalize text-sm text-white/80 font-bold">
         {condition}

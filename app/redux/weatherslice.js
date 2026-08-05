@@ -12,13 +12,11 @@ export const get_city = createAsyncThunk(
       const forecast = await axios.get(`/api/forecast?city=${encodeURIComponent(city)}&lang=${lang}`)
 
       const air = await axios.get(`/api/air?lat=${weather.data.coord.lat}&lon=${weather.data.coord.lon}`)
-      const uv = await axios.get(`/api/uv?lat=${weather.data.coord.lat}&lon=${weather.data.coord.lon}`)
-      const hourly_weather = await axios.get(
-  `/api/hourly?lat=${weather.data.coord.lat}&lon=${weather.data.coord.lon}`
+      const extra = await axios.get(
+  `/api/extra?lat=${weather.data.coord.lat}&lon=${weather.data.coord.lon}`
 );
 
-      return {weather:weather.data , forecast:forecast.data , air:air.data , uv:uv.data,visibility: uv.data.current.visibility,
-      Maxtemp:uv.data.daily.temperature_2m_max , Mintemp:uv.data.daily.temperature_2m_min,hourly_weather:hourly_weather.data
+      return {weather:weather.data , forecast:forecast.data , air:air.data , extra:extra.data
       }
     
     
@@ -48,10 +46,7 @@ const weatherslice = createSlice({
     air:null,
     uv:null,
     error: null,
-    visibility:null,
-    Maxtemp:null,
-    Mintemp:null,
-    hourly_weather:null,
+    extra:null,
     suggestions:[],
     loading: false,
   },
@@ -70,11 +65,7 @@ const weatherslice = createSlice({
         state.weather = action.payload.weather
         state.forecast = action.payload.forecast
         state.air = action.payload.air
-        state.uv = action.payload.uv
-        state.visibility=action.payload.visibility
-        state.Maxtemp=action.payload.Maxtemp
-        state.Mintemp=action.payload.Mintemp
-        state.hourly_weather = action.payload.hourly_weather;
+        state.extra=action.payload.extra;
         
       })
 
@@ -83,11 +74,7 @@ const weatherslice = createSlice({
         state.weather = null;
         state.forecast=null;
         state.air=null;
-        state.uv=null;
-        state.visibility=null;
-        state.Maxtemp=null;
-        state.Mintemp=null;
-        state.hourly_weather = null;
+        state.extra=null;
         
 
         state.error = action.payload;

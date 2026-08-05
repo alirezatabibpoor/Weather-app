@@ -25,7 +25,7 @@ export default function Details({
   clouds,
   sunrise,
   sunset,
-  uv
+  extra
 }) {
   
   
@@ -60,7 +60,7 @@ export default function Details({
 
      <CloudArea clouds={clouds} getCloudStatus={getCloudStatus}/>  
 
-     <Uvindex uv={uv} getUVColor={getUVColor} getUVStatus={getUVStatus}/>
+     <Uvindex extra={extra} getUVColor={getUVColor} getUVStatus={getUVStatus}/>
 
    
      </div>

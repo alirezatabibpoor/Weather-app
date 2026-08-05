@@ -1,6 +1,6 @@
 import {Sun} from 'lucide-react';
 import Progress from '../../progress';
-export default function Uvindex({uv , getUVStatus , getUVColor})
+export default function Uvindex({extra , getUVStatus , getUVColor})
 {
     return(
         <>
@@ -15,23 +15,23 @@ export default function Uvindex({uv , getUVStatus , getUVColor})
     <Sun
       size={46}
       className={`text-yellow-400 transition-all duration-500 hover:rotate-180 ${getUVColor(
-        uv?.current?.uv_index
+        extra?.current?.uv_index
       )
         .replace("bg-", "text-")}`}
     />
   </div>
 
   <p className="text-2xl font-bold">
-    {uv?.current?.uv_index?.toFixed(1)}
+    {extra?.current?.uv_index?.toFixed(1)}
   </p>
 
   <p className="mb-2 text-sm text-blue-100">
-    {getUVStatus(uv?.current?.uv_index)}
+    {getUVStatus(extra?.current?.uv_index)}
   </p>
 
   <Progress
-     percent={Math.min((uv?.current?.uv_index / 11) * 100, 100)}
-    color={getUVColor(uv?.current?.uv_index)}
+     percent={Math.min((extra?.current?.uv_index / 11) * 100, 100)}
+    color={getUVColor(extra?.current?.uv_index)}
   />
 
 </div>

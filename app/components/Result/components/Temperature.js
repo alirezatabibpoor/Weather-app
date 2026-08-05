@@ -1,7 +1,8 @@
 import TemperatureChart from "./chart"; 
 import { ChartBar } from "lucide-react";
 import Accordion from "../../Accordion";
-export default function Tempreature({temperature , maxTemp , minTemp , condition , forecast})
+import { weatherCodeToText } from "@/app/utils/function";
+export default function Tempreature({temperature , condition , forecast ,minTemp , maxTemp})
 {
     return(
           <div className="mx-2 my-8 text-center">
@@ -32,8 +33,8 @@ export default function Tempreature({temperature , maxTemp , minTemp , condition
 
 </div>
 
-        <p className="mt-2 text-lg font-medium text-blue-100 animate-pulse">
-          {condition}
+        <p className="font-bold mt-2 text-lg font-medium text-blue-100 animate-pulse">
+          {weatherCodeToText(condition)}
         </p>
 
         <Accordion title={"Status Charts"} icon={<ChartBar/>}>

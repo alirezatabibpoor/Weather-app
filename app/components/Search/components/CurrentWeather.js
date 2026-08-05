@@ -1,5 +1,5 @@
 import Result from "../../Result/result"
-export default function CurrentWeather({loading , weather ,uv , forecast})
+export default function CurrentWeather({loading , weather ,extra, forecast})
 {
     return(
         <>
@@ -10,7 +10,7 @@ export default function CurrentWeather({loading , weather ,uv , forecast})
            country={weather.sys.country}
            temperature={weather.main.temp}
            humidity={weather.main.humidity}
-           condition={weather.weather[0].description}
+           condition={extra?.current?.weather_code}
            icon={weather.weather[0].icon}
            sunrise={weather.sys.sunrise}
            sunset={weather.sys.sunset}
@@ -18,11 +18,11 @@ export default function CurrentWeather({loading , weather ,uv , forecast})
            windDirection={weather.wind.deg}
            pressure={weather.main.pressure}
            feelsLike={weather.main.feels_like}
-           visibility={uv?.current?.visibility}
+           visibility={extra?.current?.visibility}
            clouds={weather.clouds.all}
-           minTemp={uv?.daily?.temperature_2m_min?.[0]}
-           maxTemp={uv?.daily?.temperature_2m_max?.[0]}
-           uv={uv}
+           minTemp={extra?.daily?.temperature_2m_min?.[0]}
+           maxTemp={extra?.daily?.temperature_2m_max?.[0]}
+           extra={extra}
            timezone={weather.timezone}
            forecast={forecast}
           

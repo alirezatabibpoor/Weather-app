@@ -84,16 +84,143 @@ export const getSunProgress = (sunrise, sunset) => {
   return ((now - sunrise) / (sunset - sunrise)) * 100;
 };
 
-export function weatherCodeToEmoji(code) {
+export function weatherCodeToEmoji(code, isDay = 1) {
+
+  if (isDay === 0) {
+    if (code === 0) return "🌙";
+    if ([1,2,3].includes(code)) return "🌙";
+    if ([45,48].includes(code)) return "🌫️";
+    if ([51,53,55,61,63,65].includes(code)) return "🌧️";
+    if ([71,73,75].includes(code)) return "❄️";
+    if ([95,96,99].includes(code)) return "⛈️";
+  }
+
+
   if (code === 0) return "☀️";
-  if ([1, 2].includes(code)) return "🌤️";
+  if ([1,2].includes(code)) return "🌤️";
   if (code === 3) return "☁️";
-  if ([45, 48].includes(code)) return "🌫️";
-  if ([51, 53, 55].includes(code)) return "🌦️";
-  if ([61, 63, 65].includes(code)) return "🌧️";
-  if ([71, 73, 75].includes(code)) return "❄️";
-  if ([80, 81, 82].includes(code)) return "🌦️";
-  if ([95, 96, 99].includes(code)) return "⛈️";
+  if ([45,48].includes(code)) return "🌫️";
+  if ([51,53,55].includes(code)) return "🌦️";
+  if ([61,63,65].includes(code)) return "🌧️";
+  if ([71,73,75].includes(code)) return "❄️";
+  if ([95,96,99].includes(code)) return "⛈️";
 
   return "🌤️";
 }
+export function weatherCodeToText(code) {
+  switch (code) {
+    case 0:
+      return "Clear Sky";
+
+    case 1:
+      return "Mainly Clear";
+
+    case 2:
+      return "Partly Cloudy";
+
+    case 3:
+      return "Overcast";
+
+    case 45:
+    case 48:
+      return "Fog";
+
+    case 51:
+    case 53:
+    case 55:
+      return "Drizzle";
+
+    case 61:
+    case 63:
+    case 65:
+      return "Rain";
+
+    case 71:
+    case 73:
+    case 75:
+      return "Snow";
+
+    case 95:
+    case 96:
+    case 99:
+      return "Thunderstorm";
+
+    default:
+      return "Unknown";
+  }
+}
+
+export const getAQIStatus = (aqi) => {
+
+  if (aqi == null || isNaN(aqi))
+    return "No Data";
+
+
+  if (aqi <= 50)
+    return "🟢 Good";
+
+
+  if (aqi <= 100)
+    return "🟡 Moderate";
+
+
+  if (aqi <= 150)
+    return "🟠 Unhealthy for Sensitive Groups";
+
+
+  if (aqi <= 200)
+    return "🔴 Unhealthy";
+
+
+  if (aqi <= 300)
+    return "🟣 Very Unhealthy";
+
+
+  return "🟤 Hazardous";
+
+};
+
+
+
+export const getAQIColor = (aqi)=>{
+
+  if (aqi == null || isNaN(aqi))
+    return "bg-gray-400";
+
+
+  if(aqi <= 50)
+    return "bg-green-500";
+
+
+  if(aqi <=100)
+    return "bg-yellow-400";
+
+
+  if(aqi <=150)
+    return "bg-orange-500";
+
+
+  if(aqi <=200)
+    return "bg-red-500";
+
+
+  if(aqi <=300)
+    return "bg-purple-600";
+
+
+  return "bg-black";
+
+};
+
+
+
+export const getAQIPercent = (aqi)=>{
+
+  if(!aqi || isNaN(aqi))
+    return 0;
+
+
+  // نمایش نسبی روی نمودار
+  return Math.min((aqi / 300) * 100 ,100);
+
+};
