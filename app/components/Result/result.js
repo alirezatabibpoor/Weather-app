@@ -26,7 +26,7 @@ export default function Result({
   forecast,
 }) {
   
-  
+  const{hourly_weather}= useWeathear();
 
   return (
     <div className="w-fit overflow-hidden rounded-3xl bg-linear-to-br from-blue-500 via-blue-600 to-indiego-400 dark:from-gray-700 dark:via-gray-800 dark:to-gray-900 text-white shadow-2xl transition duration-300
@@ -60,7 +60,7 @@ hover:shadow-blue-500/40 dark:hover:shadow-gray-500/40
   title="Hourly Forecast"
   icon="🕒"
 >
-  <HourlyForecast forecast={forecast} />
+  <HourlyForecast hourly_weather={hourly_weather} />
 </Accordion>
 
     </div>

@@ -6,12 +6,14 @@ export async function GET(request) {
   const lat = searchParams.get("lat");
   const lon = searchParams.get("lon");
 
-  const res = await fetch(
-    `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&forecast_days=2&timezone=auto`
+  const response = await fetch(
+    `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,relative_humidity_2m,wind_speed_10m,weather_code&forecast_days=1&timezone=auto`
   );
 
-  const data = await res.json();
-
-
-  return NextResponse.json(data);
+   const data = await response.json();
+    if(!response.ok){
+        return NextResponse.json(data,{status:response.status})
+    }
+    return NextResponse.json(data)
+    
 }

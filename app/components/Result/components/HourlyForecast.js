@@ -1,39 +1,48 @@
-export default function HourlyForecast({forecast})
-{
-    return(
-        <div className="flex gap-4 overflow-x-auto rounded-2xl bg-white/10 p-4 backdrop-blur-xl">
+"use client";
 
-      {forecast?.list.slice(0, 10).map((item) => (
+import { weatherCodeToEmoji } from "@/app/utils/function";
+
+export default function HourlyForecast({ hourly_weather }) {
+
+  if (!hourly_weather) return null;
+
+  return (
+    <div className="flex gap-4 overflow-x-auto rounded-2xl bg-white/10 p-4 backdrop-blur-xl">
+
+      {hourly_weather.hourly.time.slice(0, 12).map((time, index) => (
+
         <div
-          key={item.dt}
-          className="hover:animate-pulse hover:scale-115 min-w-22.5 transition ease-in-out duration-500 rounded-xl bg-white/10 p-3 text-center"
+          key={time}
+          className="hover:animate-pulse hover:scale-115 min-w-22.5 rounded-xl bg-white/10 p-3 text-center transition ease-in-out duration-500"
         >
+
           <p className="text-sm">
-            {new Date(item.dt * 1000).toLocaleTimeString([], {
+            {new Date(time).toLocaleTimeString([], {
               hour: "2-digit",
               minute: "2-digit",
             })}
           </p>
 
-          <img
-            src={`https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png`}
-            className="animate-cloud mx-auto w-12"
-          />
+          <div className="my-2 text-4xl animate-sway">
+            {weatherCodeToEmoji(hourly_weather.hourly.weather_code[index])}
+          </div>
 
           <p className="font-bold">
-            {Math.round(item.main.temp)}°
+            {Math.round(hourly_weather.hourly.temperature_2m[index])}°
           </p>
 
           <p className="text-xs">
-            💧 {item.main.humidity}%
+            💧 {hourly_weather.hourly.relative_humidity_2m[index]}%
           </p>
 
           <p className="text-xs">
-            💨 {item.wind.speed} m/s
+            💨 {Math.round(hourly_weather.hourly.wind_speed_10m[index])} km/h
           </p>
+
         </div>
+
       ))}
 
     </div>
-    )
+  );
 }
