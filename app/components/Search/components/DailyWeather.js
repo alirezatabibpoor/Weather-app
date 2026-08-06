@@ -44,8 +44,47 @@ export default function DailyWeather({
     dailyIndex !== -1
       ? extra?.daily?.temperature_2m_min?.[dailyIndex]
       : undefined;
-const aqi = dailyIndex!== -1
-? extra?.hourly?.us_aqi[dailyIndex]:undefined;
+// میانگین AQI همان روز
+
+// میانگین AQI همان روز
+let averageAQI;
+
+if (
+  selectedDate &&
+  extra?.hourly?.time &&
+  extra?.hourly?.us_aqi
+) {
+  const dayValues = extra.hourly.time
+    .map((time, index) => ({
+      time,
+      date: time.split("T")[0],
+      aqi: extra.hourly.us_aqi[index],
+    }))
+    .filter(
+      (item) =>
+        item.date === selectedDate &&
+        item.aqi != null
+    );
+
+  if (dayValues.length > 0) {
+    averageAQI =
+      dayValues.reduce(
+        (sum, item) => sum + item.aqi,
+        0
+      ) / dayValues.length;
+  } else {
+    // اگر آن روز داده‌ای وجود نداشت
+    // نزدیک‌ترین مقدار موجود را پیدا کن
+    const fallbackIndex = extra.hourly.time.findIndex((t) =>
+      t.startsWith(selectedDate)
+    );
+
+    if (fallbackIndex !== -1) {
+      averageAQI =
+        extra.hourly.us_aqi[fallbackIndex];
+    }
+  }
+}
   return (
 
     <div
@@ -249,58 +288,50 @@ const aqi = dailyIndex!== -1
 
 
 
+      
+
       {/* Air Quality */}
 
-      {aqi && (
+{averageAQI != null && (
+  <div className="mt-6 rounded-2xl border border-white/20 bg-white/10 p-5 backdrop-blur-xl">
+
+    <div className="flex items-center justify-between">
+
+      <span className="text-lg font-semibold">
+        🌫 Daily Average AQI
+      </span>
+
+      <span
+        className={`
+          rounded-full
+          px-4
+          py-1
+          font-bold
+          ${getAQIColor(averageAQI)}
+        `}
+      >
+        {Math.round(averageAQI)}
+      </span>
+
+    </div>
+
+    <div className="mt-4">
+
+      <div className="h-3 overflow-hidden rounded-full bg-white/20">
 
         <div
-          className="
-          mt-6
-          rounded-2xl
-          border
-          border-white/20
-          bg-white/10
-          p-5
-          backdrop-blur-xl
-          "
-        >
+          className={`${getAQIColor(averageAQI)} h-full transition-all duration-700`}
+          style={{
+            width: `${Math.min((averageAQI / 300) * 100, 100)}%`,
+          }}
+        />
 
-          <div
-            className="
-            flex
-            items-center
-            justify-between
-            "
-          >
+      </div>
 
-            <span className="text-lg font-semibold">
-              🌫 Air Quality
-            </span>
+    </div>
 
-
-            <span
-              className={`
-              rounded-full
-              px-4
-              py-1
-              font-bold
-
-              ${
-                getAQIColor(aqi)
-              }
-
-              `}
-            >
-
-              {aqi}
-
-            </span>
-
-          </div>
-
-        </div>
-
-      )}
+  </div>
+)}
 
     </div>
 
