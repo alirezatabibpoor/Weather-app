@@ -23,9 +23,10 @@ export default function Result({
   maxTemp,
   timezone,
   forecast,
+  extra
 }) {
   
-  const{extra}= useWeathear();
+  
 
   return (
     <div className="w-fit overflow-hidden rounded-3xl bg-linear-to-br from-blue-500 via-blue-600 to-indiego-400 dark:from-gray-700 dark:via-gray-800 dark:to-gray-900 text-white shadow-2xl transition duration-300
@@ -34,7 +35,7 @@ hover:shadow-blue-500/40 dark:hover:shadow-gray-500/40
 ">
       <Header extra={extra} country={country} name={name} icon={icon} condition={condition} timezone={timezone}/>
       {/* Temperature */}
-      <Tempreature temperature={temperature} maxTemp={maxTemp} minTemp={minTemp} condition={condition} forecast={forecast}/>
+      <Tempreature temperature={temperature} maxTemp={maxTemp} minTemp={minTemp} condition={condition} forecast={forecast} extra={extra}/>
       
       <Accordion
        title="Weather Details"

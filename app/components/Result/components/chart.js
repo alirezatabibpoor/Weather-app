@@ -9,17 +9,22 @@ import {
   CartesianGrid,
 } from "recharts";
 
-export default function TemperatureChart({ forecast }) {
-  if (!forecast?.list) return null;
+export default function TemperatureChart({ extra }) {
+  if (!extra?.hourly) return null;
 
-  const chartData = forecast.list.slice(0,12).map((item) => ({
-    time: new Date(item.dt * 1000).toLocaleTimeString([], {
-      hour: "2-digit",
-      minute: "2-digit",
-    }),
-    temp: Math.round(item.main.temp),
-    feels: Math.round(item.main.feels_like),
-  }));
+  const chartData = extra.hourly.time
+    .slice(0, 12)
+    .map((time, index) => ({
+      time: new Date(time).toLocaleTimeString([], {
+        hour: "2-digit",
+        minute: "2-digit",
+      }),
+      temp: Math.round(extra.hourly.temperature_2m[index]),
+      feels: Math.round(
+        extra.hourly.apparent_temperature?.[index] ??
+          extra.hourly.temperature_2m[index]
+      ),
+    }));
 
   return (
     <div className="rounded-3xl bg-white/10 p-6 backdrop-blur-xl">

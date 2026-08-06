@@ -1,8 +1,9 @@
 "use client";
 
+import { getAQIColor } from "@/app/utils/function";
+
 export default function DailyWeather({
   data,
-  air,
   extra,
 }) {
 
@@ -15,7 +16,7 @@ export default function DailyWeather({
   };
 
 
-  const aqi = air?.list?.[0]?.main?.aqi;
+  
 
 
   // تاریخ روز انتخاب‌شده از OpenWeather
@@ -43,8 +44,8 @@ export default function DailyWeather({
     dailyIndex !== -1
       ? extra?.daily?.temperature_2m_min?.[dailyIndex]
       : undefined;
-
-
+const aqi = dailyIndex!== -1
+? extra?.hourly?.us_aqi[dailyIndex]:undefined;
   return (
 
     <div
@@ -191,7 +192,7 @@ export default function DailyWeather({
 
         <InfoCard
           title="Wind"
-          value={`${data.wind.speed} m/s`}
+          value={`${extra?.daily?.wind_speed_10m_max[dailyIndex]} m/s`}
           icon="🌬️"
         />
 
@@ -241,7 +242,7 @@ export default function DailyWeather({
           font-bold
           "
         >
-          🧭 {data.wind.deg}°
+          🧭 {extra?.daily?.wind_direction_10m_dominant[dailyIndex]}°
         </p>
 
       </div>
@@ -285,25 +286,13 @@ export default function DailyWeather({
               font-bold
 
               ${
-                aqi === 1
-                  ? "bg-green-500"
-
-                  : aqi === 2
-                  ? "bg-yellow-500"
-
-                  : aqi === 3
-                  ? "bg-orange-500"
-
-                  : aqi === 4
-                  ? "bg-red-500"
-
-                  : "bg-purple-600"
+                getAQIColor(aqi)
               }
 
               `}
             >
 
-              {quality[aqi]}
+              {aqi}
 
             </span>
 

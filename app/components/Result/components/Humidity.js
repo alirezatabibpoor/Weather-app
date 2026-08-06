@@ -1,5 +1,6 @@
 import Progress from "../../progress";
 import {DropletIcon} from 'lucide-react'
+import { weatherCodeToText } from "@/app/utils/function";
 export default function Humidity({humidity,condition})
 {
     return(
@@ -18,7 +19,7 @@ export default function Humidity({humidity,condition})
 
         <div className="text-center">
           <p className="text-lg font-bold text-blue-100">Condition</p>
-          <p className="mt-1 text-xl font-bold">{condition}</p>
+          <p className="mt-1 text-xl font-bold animate-pulse">{weatherCodeToText(condition)}</p>
         </div>
       </div>
         </>
